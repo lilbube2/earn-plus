@@ -9,26 +9,41 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f3f4f6;
   color:#172033
 }
+
 .app{
   max-width:520px;
   min-height:100vh;
   margin:auto;
   background:#fff
 }
+
 header{
   background:#111827;
   color:white;
   padding:22px 20px
 }
-header h1{margin:0;font-size:26px}
-header p{margin:6px 0 0;opacity:.75}
-main{padding:18px}
+
+header h1{
+  margin:0;
+  font-size:26px
+}
+
+header p{
+  margin:6px 0 0;
+  opacity:.75
+}
+
+main{
+  padding:18px
+}
+
 .card{
   background:white;
   border-radius:16px;
@@ -36,14 +51,17 @@ main{padding:18px}
   margin-bottom:15px;
   box-shadow:0 3px 15px rgba(0,0,0,.08)
 }
+
 .balance{
   background:#111827;
   color:white
 }
+
 .balance h2{
   font-size:30px;
   margin:8px 0
 }
+
 input,select{
   width:100%;
   padding:14px;
@@ -52,6 +70,7 @@ input,select{
   border-radius:10px;
   font-size:15px
 }
+
 button{
   width:100%;
   padding:13px;
@@ -60,26 +79,45 @@ button{
   background:#111827;
   color:white;
   font-size:15px;
-  margin-top:8px
+  margin-top:8px;
+  cursor:pointer
 }
+
 button.secondary{
   background:#e5e7eb;
   color:#111827
 }
-button.green{background:#16a34a}
-button.red{background:#dc2626}
+
+button.green{
+  background:#16a34a
+}
+
+button.red{
+  background:#dc2626
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed
+}
+
 .task{
   border:1px solid #e5e7eb;
   border-radius:13px;
   padding:15px;
   margin-bottom:12px
 }
-.task h3{margin:0 0 7px}
+
+.task h3{
+  margin:0 0 7px
+}
+
 .reward{
   color:#16a34a;
   font-weight:bold;
   margin-bottom:8px
 }
+
 .nav{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -90,14 +128,26 @@ button.red{background:#dc2626}
   padding:10px;
   border-top:1px solid #ddd
 }
+
 .nav button{
   margin:0;
   padding:11px 5px;
   font-size:12px
 }
-.hidden{display:none}
-.center{text-align:center}
-.small{font-size:13px;color:#6b7280}
+
+.hidden{
+  display:none
+}
+
+.center{
+  text-align:center
+}
+
+.small{
+  font-size:13px;
+  color:#6b7280
+}
+
 .code{
   background:#f3f4f6;
   padding:12px;
@@ -105,6 +155,7 @@ button.red{background:#dc2626}
   word-break:break-all;
   font-weight:bold
 }
+
 .error{
   background:#fee2e2;
   color:#991b1b;
@@ -112,6 +163,7 @@ button.red{background:#dc2626}
   border-radius:10px;
   margin-bottom:12px
 }
+
 .success{
   background:#dcfce7;
   color:#166534;
@@ -135,97 +187,234 @@ button.red{background:#dc2626}
 
 <!-- AUTH -->
 <section id="auth" class="card">
-<h2>Welcome</h2>
-<p class="small">Login or create your Earn Plus account.</p>
 
-<input id="email" type="email" placeholder="Email address">
-<input id="password" type="password" placeholder="Password">
+<h2>Welcome</h2>
+
+<p class="small">
+Login or create your Earn Plus account.
+</p>
+
+<input
+  id="email"
+  type="email"
+  placeholder="Email address"
+>
+
+<input
+  id="password"
+  type="password"
+  placeholder="Password"
+>
 
 <button onclick="login()">Login</button>
-<button class="secondary" onclick="signup()">Create account</button>
+
+<button
+  class="secondary"
+  onclick="signup()"
+>
+Create account
+</button>
 
 <p class="small center">
 After creating an account, check your email if confirmation is required.
 </p>
+
 </section>
+
 
 <!-- APP -->
 <div id="appContent" class="hidden">
 
 <main>
 
+<!-- HOME -->
 <section id="home">
 
 <div class="card balance">
+
 <p>Available Balance</p>
-<h2 id="balance">₦0</h2>
-<p>Total Earned: ₦<span id="totalEarned">0</span></p>
+
+<h2 id="balance">
+₦0
+</h2>
+
+<p>
+Total Earned:
+₦<span id="totalEarned">0</span>
+</p>
+
 </div>
 
+
+<!-- ACCOUNT -->
 <div class="card">
+
 <h3>👤 Your Account</h3>
-<p>Referrals: <b id="referrals">0</b></p>
+
+<p>
+Referrals:
+<b id="referrals">0</b>
+</p>
+
 <p>Your referral code:</p>
-<div class="code" id="refCode">Loading...</div>
-<button onclick="copyReferral()">Copy referral code</button>
+
+<div
+  class="code"
+  id="refCode"
+>
+Loading...
 </div>
 
+<button onclick="copyReferral()">
+Copy referral code
+</button>
+
+</div>
+
+
+<!-- TASKS -->
 <div class="card">
+
 <h3>📋 Tasks</h3>
-<div id="tasks">Loading tasks...</div>
+
+<div id="tasks">
+Loading tasks...
+</div>
+
 </div>
 
 </section>
 
+
+<!-- WITHDRAW -->
 <section id="withdraw" class="hidden">
 
 <div class="card">
+
 <h2>💰 Withdraw</h2>
-<p class="small">Minimum withdrawal: ₦5,000</p>
 
-<input id="withdrawAmount" type="number" placeholder="Amount">
-<input id="bankName" placeholder="Bank name">
-<input id="accountName" placeholder="Account name">
-<input id="accountNumber" placeholder="Account number">
+<p class="small">
+Minimum withdrawal: ₦5,000
+</p>
 
-<button class="green" onclick="withdraw()">Request withdrawal</button>
+<input
+  id="withdrawAmount"
+  type="number"
+  min="5000"
+  placeholder="Amount"
+>
+
+<input
+  id="bankName"
+  type="text"
+  placeholder="Bank name"
+>
+
+<input
+  id="accountName"
+  type="text"
+  placeholder="Account name"
+>
+
+<input
+  id="accountNumber"
+  type="text"
+  inputmode="numeric"
+  placeholder="Account number"
+>
+
+<button
+  id="withdrawButton"
+  class="green"
+  onclick="withdraw()"
+>
+Request withdrawal
+</button>
+
 </div>
 
 </section>
 
+
+<!-- PROFILE -->
 <section id="profile" class="hidden">
 
 <div class="card">
+
 <h2>👤 Profile</h2>
 
 <p>Email</p>
-<div class="code" id="profileEmail">Loading...</div>
+
+<div
+  class="code"
+  id="profileEmail"
+>
+Loading...
+</div>
+
 
 <p>Referral Code</p>
-<div class="code" id="profileReferral">Loading...</div>
+
+<div
+  class="code"
+  id="profileReferral"
+>
+Loading...
+</div>
+
 
 <p>Balance</p>
-<div class="code">₦<span id="profileBalance">0</span></div>
 
-<button class="red" onclick="logout()">Log out</button>
+<div class="code">
+₦<span id="profileBalance">0</span>
+</div>
+
+
+<button
+  class="red"
+  onclick="logout()"
+>
+Log out
+</button>
+
 </div>
 
 </section>
 
 </main>
 
+
+<!-- NAVIGATION -->
 <div class="nav">
-<button onclick="showPage('home')">🏠 Home</button>
-<button onclick="showPage('withdraw')">💰 Withdraw</button>
-<button onclick="showPage('profile')">👤 Profile</button>
-<button onclick="logout()">🚪 Logout</button>
-</div>
+
+<button onclick="showPage('home')">
+🏠 Home
+</button>
+
+<button onclick="showPage('withdraw')">
+💰 Withdraw
+</button>
+
+<button onclick="showPage('profile')">
+👤 Profile
+</button>
+
+<button onclick="logout()">
+🚪 Logout
+</button>
 
 </div>
 
 </div>
+
+</div>
+
 
 <script>
+
+/* =========================
+   SUPABASE CONFIG
+========================= */
 
 const SUPABASE_URL =
 "https://dspxxvzgqdaolzrzczkh.supabase.co";
@@ -233,353 +422,35 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_rv4ag6QTFKvgnEpzHnSg4g_bN8qq6C-";
 
-const {createClient} =
-supabase;
+const {
+  createClient
+} = supabase;
 
 const db = createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
+
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
 
 let currentUser = null;
 let profile = null;
 
+
+/* =========================
+   MONEY FORMAT
+========================= */
+
 function money(n){
+
 return Number(n || 0).toLocaleString("en-NG");
-}
-
-function message(text,type="error"){
-const box=document.getElementById("message");
-
-box.innerHTML=
-`<div class="${type}">
-${text}
-</div>`;
-
-setTimeout(()=>{
-box.innerHTML="";
-},5000);
-}
-
-async function signup(){
-
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
-
-if(!email || !password){
-message("Enter your email and password.");
-return;
-}
-
-if(password.length < 6){
-message("Password must be at least 6 characters.");
-return;
-}
-
-const {error}=await db.auth.signUp({
-email,
-password
-});
-
-if(error){
-message(error.message);
-return;
-}
-
-message(
-"Account created. Check your email if confirmation is required.",
-"success"
-);
-}
-
-async function login(){
-
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
-
-if(!email || !password){
-message("Enter your email and password.");
-return;
-}
-
-const {data,error}=await db.auth.signInWithPassword({
-email,
-password
-});
-
-if(error){
-message(error.message);
-return;
-}
-
-currentUser=data.user;
-
-await loadApp();
-}
-
-async function loadApp(){
-
-document.getElementById("auth").classList.add("hidden");
-document.getElementById("appContent").classList.remove("hidden");
-
-await loadProfile();
-await loadTasks();
-await loadReferrals();
-}
-
-async function loadProfile(){
-
-const {data,error}=await db
-.from("profiles")
-.select("*")
-.eq("id",currentUser.id)
-.single();
-
-if(error){
-message("Could not load your profile.");
-return;
-}
-
-profile=data;
-
-document.getElementById("balance").textContent=
-"₦"+money(profile.balance);
-
-document.getElementById("totalEarned").textContent=
-money(profile.total_earned);
-
-document.getElementById("refCode").textContent=
-profile.referral_code || "Not available";
-
-document.getElementById("profileEmail").textContent=
-currentUser.email;
-
-document.getElementById("profileReferral").textContent=
-profile.referral_code || "Not available";
-
-document.getElementById("profileBalance").textContent=
-money(profile.balance);
-}
-
-async function loadReferrals(){
-
-const {count,error}=await db
-.from("referrals")
-.select("*",{count:"exact",head:true})
-.eq("referrer_id",currentUser.id);
-
-if(!error){
-document.getElementById("referrals").textContent=count || 0;
-}
-}
-
-async function loadTasks(){
-
-const box=document.getElementById("tasks");
-
-const {data,error}=await db
-.from("tasks")
-.select("*")
-.eq("active",true)
-.order("created_at",{ascending:false});
-
-if(error){
-box.innerHTML="<p>Unable to load tasks.</p>";
-return;
-}
-
-if(!data || data.length===0){
-box.innerHTML="<p>No active tasks yet.</p>";
-return;
-}
-
-box.innerHTML="";
-
-data.forEach(task=>{
-
-const div=document.createElement("div");
-div.className="task";
-
-div.innerHTML=`
-<h3>${escapeHtml(task.title)}</h3>
-<p>${escapeHtml(task.description || "")}</p>
-<div class="reward">+₦${money(task.reward)}</div>
-`;
-
-if(task.task_link){
-
-const open=document.createElement("button");
-open.textContent="Open task";
-open.className="green";
-
-open.onclick=()=>{
-window.open(task.task_link,"_blank");
-};
-
-div.appendChild(open);
-}
-
-const submit=document.createElement("button");
-submit.textContent="Submit task";
-submit.onclick=()=>submitTask(task.id);
-
-div.appendChild(submit);
-
-box.appendChild(div);
-
-});
 
 }
 
-async function submitTask(taskId){
 
-const {data:existing}=await db
-.from("task_submissions")
-.select("id,status")
-.eq("task_id",taskId)
-.eq("user_id",currentUser.id);
-
-if(existing && existing.length>0){
-message("You have already submitted this task.");
-return;
-}
-
-const {error}=await db
-.from("task_submissions")
-.insert({
-task_id:taskId,
-user_id:currentUser.id,
-status:"pending"
-});
-
-if(error){
-message(error.message);
-return;
-}
-
-message(
-"Task submitted. It will be reviewed before the reward is credited.",
-"success"
-);
-}
-
-async function withdraw(){
-
-const amount=Number(
-document.getElementById("withdrawAmount").value
-);
-
-const bankName=
-document.getElementById("bankName").value.trim();
-
-const accountName=
-document.getElementById("accountName").value.trim();
-
-const accountNumber=
-document.getElementById("accountNumber").value.trim();
-
-if(amount < 5000){
-message("Minimum withdrawal is ₦5,000.");
-return;
-}
-
-if(amount > Number(profile.balance)){
-message("Your balance is not enough for this withdrawal.");
-return;
-}
-
-if(!bankName || !accountName || !accountNumber){
-message("Please complete all bank details.");
-return;
-}
-
-const {error}=await db
-.from("withdrawals")
-.insert({
-user_id:currentUser.id,
-amount:amount,
-bank_name:bankName,
-account_name:accountName,
-account_number:accountNumber,
-status:"pending"
-});
-
-if(error){
-message(error.message);
-return;
-}
-
-message(
-"Withdrawal request submitted for admin review.",
-"success"
-);
-
-document.getElementById("withdrawAmount").value="";
-document.getElementById("bankName").value="";
-document.getElementById("accountName").value="";
-document.getElementById("accountNumber").value="";
-}
-
-function showPage(page){
-
-document.getElementById("home").classList.add("hidden");
-document.getElementById("withdraw").classList.add("hidden");
-document.getElementById("profile").classList.add("hidden");
-
-document.getElementById(page).classList.remove("hidden");
-}
-
-async function copyReferral(){
-
-const code=profile?.referral_code;
-
-if(!code)return;
-
-await navigator.clipboard.writeText(code);
-
-message("Referral code copied.","success");
-}
-
-async function logout(){
-
-await db.auth.signOut();
-
-currentUser=null;
-profile=null;
-
-document.getElementById("appContent").classList.add("hidden");
-document.getElementById("auth").classList.remove("hidden");
-
-message("Logged out.","success");
-}
-
-function escapeHtml(value){
-
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-}
-
-async function checkSession(){
-
-const {data}=await db.auth.getSession();
-
-if(data.session){
-
-currentUser=data.session.user;
-
-await loadApp();
-
-}
-
-}
-
-checkSession();
-
-</script>
-
-</body>
-  </html>
+/* =========================
+   MESSAGE
+================
